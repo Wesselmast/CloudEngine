@@ -9,8 +9,6 @@ namespace Cloud {
 		while (true);
 	}
 
-
 	Application::~Application() {
 	}
-
 }

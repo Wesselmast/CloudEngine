@@ -7,5 +7,5 @@
 		#define CLOUD_API __declspec(dllimport)
 	#endif
 #else 
-	#error CloudEngine only supports Windows!
+	#error Cloud Engine only supports Windows!
 #endif
