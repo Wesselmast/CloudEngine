@@ -4,6 +4,10 @@
 class App : public Cloud::Application {
 public:
 	App() {}
+
+
+
+
 	~App() {}
 };
 

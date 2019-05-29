@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core.h"
+#include "Events/Event.h" 
 
 namespace Cloud {
 	class CLOUD_API Application {
