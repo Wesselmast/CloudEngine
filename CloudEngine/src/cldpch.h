@@ -12,6 +12,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include "Cloud/Log.h"
+
 #ifdef CLD_PLATFORM_WINDOWS
 	#include <Windows.h>
 #endif

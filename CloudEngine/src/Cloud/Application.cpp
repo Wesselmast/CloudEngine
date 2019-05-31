@@ -2,17 +2,19 @@
 #include "Application.h"
 
 #include "Cloud/Events/ApplicationEvent.h"
-#include "Cloud/Log.h"
+#include <glfw/glfw3.h>
 
 namespace Cloud {
 	Application::Application() {
+		window = std::unique_ptr<Window>(Window::create());
 	}
 
 	void Application::run() {
-		WindowResizeEvent e(1920, 1080);
-		CLD_INFO(e);
-
-		while (true);
+		while (running) {
+			glClearColor(.85, .5, .1, 1);
+			glClear(GL_COLOR_BUFFER_BIT);
+			window->update();
+		}
 	}
 
 	Application::~Application() {

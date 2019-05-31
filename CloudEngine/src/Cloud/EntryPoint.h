@@ -6,7 +6,7 @@ extern Cloud::Application* Cloud::createApplication();
 
 int main(int argc, char** argv) {
 	Cloud::Log::init();
-	CLD_CORE_WARN("Welcome to Cloud Engine v1.0");
+	CLD_CORE_WARN("Welcome to Cloud Engine v0.0");
 
 	Cloud::Application* app = Cloud::createApplication();
 	app->run();

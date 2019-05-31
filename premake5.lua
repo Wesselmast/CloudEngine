@@ -9,6 +9,11 @@ workspace "CloudEngine"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+IncludeDir = {}
+IncludeDir["glfw"] = "CloudEngine/vendor/glfw/include"
+
+include "CloudEngine/vendor/glfw"
+
 project "CloudEngine"
 	location "CloudEngine"
 	kind "SharedLib"
@@ -27,7 +32,13 @@ project "CloudEngine"
 
 	includedirs {
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.glfw}"
+	}
+
+	links {
+		"glfw",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"
