@@ -1,6 +1,5 @@
 [submodule "CloudEngine/vendor/spdlog"]
 	path = CloudEngine/vendor/spdlog
 	url = https://github.com/gabime/spdlog
-[submodule "CloudEngine/vendor/GLFW"]
-	path = CloudEngine/vendor/GLFW
-	url = https://github.com/TheCherno/glfw
+[submodule "CloudEngine/vendor/glfw"]
+	path = CloudEngine/vendor/glfw	url = https://github.com/TheCherno/glfw
