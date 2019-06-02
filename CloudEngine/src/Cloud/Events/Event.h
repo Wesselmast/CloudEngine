@@ -52,7 +52,7 @@ namespace Cloud {
 
 		template<typename T>
 		bool dispatch(EventFunc<T> func) {
-			if (event.getEventType() != T::getStaticType()) {
+			if (event.getEventType() != T::getType()) {
 				return false;
 			}
 			event.Handled = func(*(T*)&event);

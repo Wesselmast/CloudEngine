@@ -68,6 +68,7 @@ namespace Cloud {
 	};
 
 	class CLOUD_API MouseButtonReleasedEvent : public MouseButtonEvent {
+	public:
 		MouseButtonReleasedEvent(int mouseButton) : MouseButtonEvent(mouseButton) {}
 
 		std::string toString() const override {

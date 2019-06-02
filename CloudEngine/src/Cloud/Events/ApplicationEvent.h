@@ -25,6 +25,7 @@ namespace Cloud {
 	};
 
 	class CLOUD_API WindowCloseEvent : public Event {
+	public:
 		WindowCloseEvent() {}
 
 		EVENT_SET_CATEGORY(APPLICATION)
@@ -32,6 +33,7 @@ namespace Cloud {
 	};
 
 	class CLOUD_API AppTickEvent : public Event {
+	public:
 		AppTickEvent() {}
 
 		EVENT_SET_CATEGORY(APPLICATION)
@@ -39,6 +41,7 @@ namespace Cloud {
 	};
 
 	class CLOUD_API AppUpdateEvent : public Event {
+	public:
 		AppUpdateEvent() {}
 
 		EVENT_SET_CATEGORY(APPLICATION)
@@ -46,6 +49,7 @@ namespace Cloud {
 	};
 
 	class CLOUD_API AppRenderEvent : public Event {
+	public:
 		AppRenderEvent() {}
 
 		EVENT_SET_CATEGORY(APPLICATION)
