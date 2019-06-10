@@ -15,6 +15,11 @@ namespace Cloud {
 		while (running) {
 			glClearColor(.85, .5, .1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
+
+			for (Layer* layer : layerStack) {
+				layer->onUpdate();
+			}
+
 			window->update();
 		}
 	}
@@ -23,7 +28,18 @@ namespace Cloud {
 		EventDispatcher dispatcher(e);
 		dispatcher.dispatch<WindowCloseEvent>(BIND_EVENT_FUNC(Application::onWindowClose));
 
-		CLD_CORE_TRACE("{0}", e);
+		for (LayerIterator iterator = layerStack.end(); iterator != layerStack.begin();) {
+			(*--iterator)->onEvent(e);
+			if (e.Handled) break;
+		}
+	}
+
+	void Application::pushLayer(Layer * layer) {
+		layerStack.pushLayer(layer);
+	}
+
+	void Application::pushOverlay(Layer * overlay) {
+		layerStack.pushOverlay(overlay);
 	}
 		
 	bool Application::onWindowClose(WindowCloseEvent& e) {

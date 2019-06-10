@@ -36,6 +36,12 @@
     <ClInclude Include="src\Cloud\Events\MouseEvent.h">
       <Filter>Cloud\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Cloud\Layer.h">
+      <Filter>Cloud</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cloud\LayerStack.h">
+      <Filter>Cloud</Filter>
+    </ClInclude>
     <ClInclude Include="src\Cloud\Log.h">
       <Filter>Cloud</Filter>
     </ClInclude>
@@ -50,6 +56,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Cloud\Application.cpp">
+      <Filter>Cloud</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Cloud\LayerStack.cpp">
       <Filter>Cloud</Filter>
     </ClCompile>
     <ClCompile Include="src\Cloud\Log.cpp">

@@ -84,6 +84,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalOptions>/MDd %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -109,6 +110,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -135,6 +137,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -156,6 +159,8 @@
     <ClInclude Include="src\Cloud\Events\Event.h" />
     <ClInclude Include="src\Cloud\Events\KeyEvent.h" />
     <ClInclude Include="src\Cloud\Events\MouseEvent.h" />
+    <ClInclude Include="src\Cloud\Layer.h" />
+    <ClInclude Include="src\Cloud\LayerStack.h" />
     <ClInclude Include="src\Cloud\Log.h" />
     <ClInclude Include="src\Cloud\Window.h" />
     <ClInclude Include="src\CloudEngine.h" />
@@ -164,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Cloud\Application.cpp" />
+    <ClCompile Include="src\Cloud\LayerStack.cpp" />
     <ClCompile Include="src\Cloud\Log.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\cldpch.cpp">
