@@ -5,6 +5,8 @@
 #include "Cloud/Events/KeyEvent.h"
 #include "Cloud/Events/MouseEvent.h"
 
+#include <glad/glad.h>
+
 namespace Cloud {
 	static bool firstTime = true;
 
@@ -41,6 +43,9 @@ namespace Cloud {
 								 nullptr, nullptr);
 		//make context current on main thread to avoid pipeline flush
 		glfwMakeContextCurrent(window);
+
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		CLD_CORE_ASSERT(status, "Could not initialize Glad!");
 		//make it so I can use the data struct when creating a callback to an event
 		//example: I want the width/height/callback when resizing the window
 		glfwSetWindowUserPointer(window, &data);

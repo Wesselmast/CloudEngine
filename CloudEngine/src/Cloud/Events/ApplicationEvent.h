@@ -44,7 +44,7 @@ namespace Cloud {
 	public:
 		AppUpdateEvent() {}
 
-		EVENT_SET_CATEGORY(APPLICATION)
+		EVENT_SET_CATEGORY(APPLICATION)	
 		EVENT_SET_TYPE(APP_UPDATE)
 	};
 

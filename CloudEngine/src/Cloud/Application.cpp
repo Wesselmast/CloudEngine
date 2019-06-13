@@ -1,12 +1,17 @@
 #include "cldpch.h"
 #include "Application.h"
 
-#include <glfw/glfw3.h>
+#include <glad/glad.h>
 
 namespace Cloud {
 #define BIND_EVENT_FUNC(func)std::bind(&func, this, std::placeholders::_1)
 
+	Application* Application::instance = nullptr;
+
 	Application::Application() {
+		CLD_CORE_ASSERT(instance, "Application already exists!");
+		instance = this;
+
 		window = std::unique_ptr<Window>(Window::create());
 		window->setEventCallback(BIND_EVENT_FUNC(Application::onEvent));
 	}
@@ -36,10 +41,12 @@ namespace Cloud {
 
 	void Application::pushLayer(Layer * layer) {
 		layerStack.pushLayer(layer);
+		layer->onAttach();
 	}
 
 	void Application::pushOverlay(Layer * overlay) {
 		layerStack.pushOverlay(overlay);
+		overlay->onAttach();
 	}
 		
 	bool Application::onWindowClose(WindowCloseEvent& e) {

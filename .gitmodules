@@ -11,3 +11,6 @@ path = CloudEngine/vendor/glfw
 	
 url = https://github.com/TheCherno/glfw 
 ignore = dirty
+[submodule "CloudEngine/vendor/imgui"]
+	path = CloudEngine/vendor/imgui
+	url = https://github.com/TheCherno/imgui

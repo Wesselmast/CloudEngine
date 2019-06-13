@@ -17,10 +17,14 @@ namespace Cloud {
 		void pushLayer(Layer* layer);
 		void pushOverlay(Layer* overlay);
 
+		inline static Application& get() { return *instance; }
+		inline Window& getWindow() { return *window; }
+
 		virtual ~Application();
 	private:
 		bool onWindowClose(WindowCloseEvent& e);
 	private:
+		static Application* instance;
 		LayerStack layerStack;
 		std::unique_ptr<Window> window;
 		bool running = true;

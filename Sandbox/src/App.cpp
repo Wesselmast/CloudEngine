@@ -20,7 +20,8 @@ private:
 class App : public Cloud::Application {
 public:
 	App() {
-		pushLayer(new ExampleLayer("AppLayer"));
+		pushLayer(new ExampleLayer("Application"));
+		pushOverlay(new Cloud::ImGuiLayer());
 	}
 	~App() {}
 };

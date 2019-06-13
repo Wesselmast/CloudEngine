@@ -11,8 +11,12 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
 IncludeDir["glfw"] = "CloudEngine/vendor/glfw/include"
+IncludeDir["glad"] = "CloudEngine/vendor/glad/include"
+IncludeDir["imgui"] = "CloudEngine/vendor/imgui"
 
 include "CloudEngine/vendor/glfw"
+include "CloudEngine/vendor/glad"
+include "CloudEngine/vendor/imgui"
 
 project "CloudEngine"
 	location "CloudEngine"
@@ -33,11 +37,15 @@ project "CloudEngine"
 	includedirs {
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.glfw}"
+		"%{IncludeDir.glfw}",
+		"%{IncludeDir.glad}",
+		"%{IncludeDir.imgui}"
 	}
 
 	links {
 		"glfw",
+		"glad",
+		"imgui",
 		"opengl32.lib"
 	}
 
@@ -48,7 +56,8 @@ project "CloudEngine"
 
 		defines {
 			"CLD_PLATFORM_WINDOWS",
-			"CLD_BUILD_DLL"
+			"CLD_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands {
