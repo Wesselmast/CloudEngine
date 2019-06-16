@@ -3,7 +3,6 @@
 #include "Event.h"
 
 namespace Cloud {
-
 	class CLOUD_API WindowResizeEvent : public Event {
 	public:
 		WindowResizeEvent(unsigned int width, unsigned int height) : width(width), height(height) {}

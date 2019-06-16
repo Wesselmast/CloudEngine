@@ -37,17 +37,15 @@ namespace Cloud {
 			firstTime = false;
 		}
 
-		window = glfwCreateWindow((int)windowProps.width,
-								 (int)windowProps.height,
-								 data.title.c_str(),
-								 nullptr, nullptr);
+		window = glfwCreateWindow((int)windowProps.width, (int)windowProps.height, data.title.c_str(), nullptr, nullptr);
+
 		//make context current on main thread to avoid pipeline flush
 		glfwMakeContextCurrent(window);
 
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		CLD_CORE_ASSERT(status, "Could not initialize Glad!");
 		//make it so I can use the data struct when creating a callback to an event
-		//example: I want the width/height/callback when resizing the window
+		//example: I want the width/height callback when resizing the window
 		glfwSetWindowUserPointer(window, &data);
 		setVSync(true);
 
@@ -89,6 +87,13 @@ namespace Cloud {
 			}
 		});
 
+		glfwSetCharCallback(window, [](GLFWwindow* window, unsigned int character) {
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+			KeyTypedEvent event(character);
+			data.eventCallback(event);
+		});
+
 		glfwSetMouseButtonCallback(window, [](GLFWwindow *window, int button, int action, int mods) {
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
@@ -116,7 +121,7 @@ namespace Cloud {
 		glfwSetCursorPosCallback(window, [](GLFWwindow *window, double xPos, double yPos) {
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
-			MousePositionChanged mousePositionEvent(xPos, yPos);
+			MousePositionChangedEvent mousePositionEvent(xPos, yPos);
 			data.eventCallback(mousePositionEvent);
 		});
 	}

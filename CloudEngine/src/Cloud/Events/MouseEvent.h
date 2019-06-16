@@ -4,9 +4,9 @@
 
 namespace Cloud {
 
-	class CLOUD_API MousePositionChanged : public Event {
+	class CLOUD_API MousePositionChangedEvent : public Event {
 	public:
-		MousePositionChanged(float x, float y) : mouseX(x), mouseY(y) {}
+		MousePositionChangedEvent(float x, float y) : mouseX(x), mouseY(y) {}
 
 		inline float getX() const { return mouseX; }
 		inline float getY() const { return mouseY; }

@@ -4,14 +4,10 @@
 #include <glad/glad.h>
 
 namespace Cloud {
-#define BIND_EVENT_FUNC(func)std::bind(&func, this, std::placeholders::_1)
-
 	Application* Application::instance = nullptr;
 
 	Application::Application() {
-		CLD_CORE_ASSERT(instance, "Application already exists!");
 		instance = this;
-
 		window = std::unique_ptr<Window>(Window::create());
 		window->setEventCallback(BIND_EVENT_FUNC(Application::onEvent));
 	}
@@ -29,13 +25,13 @@ namespace Cloud {
 		}
 	}
 
-	void Application::onEvent(Event& e) {
-		EventDispatcher dispatcher(e);
+	void Application::onEvent(Event& event) {
+		EventDispatcher dispatcher(event);
 		dispatcher.dispatch<WindowCloseEvent>(BIND_EVENT_FUNC(Application::onWindowClose));
 
 		for (LayerIterator iterator = layerStack.end(); iterator != layerStack.begin();) {
-			(*--iterator)->onEvent(e);
-			if (e.Handled) break;
+			(*--iterator)->onEvent(event);
+			if (event.Handled) break;
 		}
 	}
 

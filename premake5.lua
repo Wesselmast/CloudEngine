@@ -1,5 +1,6 @@
 workspace "CloudEngine"
-	architecture "x64";
+	architecture "x64"
+	startproject "Sandbox"
 
 	configurations {
 		"Debug",
@@ -14,14 +15,18 @@ IncludeDir["glfw"] = "CloudEngine/vendor/glfw/include"
 IncludeDir["glad"] = "CloudEngine/vendor/glad/include"
 IncludeDir["imgui"] = "CloudEngine/vendor/imgui"
 
-include "CloudEngine/vendor/glfw"
-include "CloudEngine/vendor/glad"
-include "CloudEngine/vendor/imgui"
+group "Dependencies"
+	include "CloudEngine/vendor/glfw"
+	include "CloudEngine/vendor/glad"
+	include "CloudEngine/vendor/imgui"
+
+group ""
 
 project "CloudEngine"
 	location "CloudEngine"
 	kind "SharedLib"
 	language "C++"
+	staticruntime "off"
 
 	targetdir("bin/" .. outputdir .. "/%{prj.name}")
 	objdir("obj/" .. outputdir .. "/%{prj.name}")
@@ -51,7 +56,6 @@ project "CloudEngine"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines {
@@ -66,23 +70,24 @@ project "CloudEngine"
 	
 	filter "configurations:Debug"
 		defines "CLD_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "CLD_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "CLD_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	staticruntime "off"
 
 	targetdir("bin/" .. outputdir .. "/%{prj.name}")
 	objdir("obj/" .. outputdir .. "/%{prj.name}")
@@ -103,7 +108,6 @@ project "Sandbox"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines {
@@ -112,16 +116,16 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "CLD_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "CLD_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "CLD_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 	
