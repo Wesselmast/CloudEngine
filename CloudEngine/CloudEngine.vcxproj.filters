@@ -45,6 +45,12 @@
     <ClInclude Include="src\Cloud\ImGui\ImGuiLayer.h">
       <Filter>Cloud\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="src\Cloud\Input.h">
+      <Filter>Cloud</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cloud\KeyCodes.h">
+      <Filter>Cloud</Filter>
+    </ClInclude>
     <ClInclude Include="src\Cloud\Layer.h">
       <Filter>Cloud</Filter>
     </ClInclude>
@@ -54,6 +60,9 @@
     <ClInclude Include="src\Cloud\Log.h">
       <Filter>Cloud</Filter>
     </ClInclude>
+    <ClInclude Include="src\Cloud\TempVec2.h">
+      <Filter>Cloud</Filter>
+    </ClInclude>
     <ClInclude Include="src\Cloud\Window.h">
       <Filter>Cloud</Filter>
     </ClInclude>
@@ -61,14 +70,13 @@
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h">
       <Filter>Platform\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\cldpch.h" />
-    <ClInclude Include="src\Cloud\Input.h" />
-    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
-    <ClInclude Include="src\Cloud\TempVec2.h" />
-    <ClInclude Include="src\Cloud\KeyCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Cloud\Application.cpp">
@@ -86,10 +94,12 @@
     <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
       <Filter>Platform\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\cldpch.cpp" />
-    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
   </ItemGroup>
 </Project>

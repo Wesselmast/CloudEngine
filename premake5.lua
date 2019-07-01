@@ -14,6 +14,7 @@ IncludeDir = {}
 IncludeDir["glfw"] = "CloudEngine/vendor/glfw/include"
 IncludeDir["glad"] = "CloudEngine/vendor/glad/include"
 IncludeDir["imgui"] = "CloudEngine/vendor/imgui"
+IncludeDir["glm"] = "CloudEngine/vendor/glm"
 
 group "Dependencies"
 	include "CloudEngine/vendor/glfw"
@@ -26,7 +27,8 @@ project "CloudEngine"
 	location "CloudEngine"
 	kind "SharedLib"
 	language "C++"
-	staticruntime "off"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir("bin/" .. outputdir .. "/%{prj.name}")
 	objdir("obj/" .. outputdir .. "/%{prj.name}")
@@ -44,7 +46,8 @@ project "CloudEngine"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.glfw}",
 		"%{IncludeDir.glad}",
-		"%{IncludeDir.imgui}"
+		"%{IncludeDir.imgui}",
+		"%{IncludeDir.glm}",
 	}
 
 	links {
@@ -87,7 +90,8 @@ project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
-	staticruntime "off"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir("bin/" .. outputdir .. "/%{prj.name}")
 	objdir("obj/" .. outputdir .. "/%{prj.name}")
@@ -99,7 +103,9 @@ project "Sandbox"
 
 	includedirs {
 		"CloudEngine/vendor/spdlog/include",
-		"CloudEngine/src"
+		"CloudEngine/src",
+		"CloudEngine/vendor",
+		"%{IncludeDir.glm}"
 	}
 
 	links {
