@@ -31,6 +31,8 @@ namespace Cloud {
 		virtual void setVSync(bool enabled) = 0;
 		virtual bool isVSync() const = 0;
 
+		virtual void* getNativeWindow() const = 0;
+
 		//platform-agnostic function to create a window, static because there can only be one
 		static Window* create(const WindowProps& windowProps = WindowProps());
 

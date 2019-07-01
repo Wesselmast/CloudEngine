@@ -20,6 +20,9 @@ namespace Cloud {
 		inline static Application& get() { return *instance; }
 		inline Window& getWindow() { return *window; }
 
+		virtual void begin() {}
+		virtual void update() {}
+
 		virtual ~Application();
 	private:
 		bool onWindowClose(WindowCloseEvent& e);
@@ -28,6 +31,7 @@ namespace Cloud {
 		LayerStack layerStack;
 		std::unique_ptr<Window> window;
 		bool running = true;
+		float frameRate = 0;
 	};
 
 	Application* createApplication();

@@ -13,7 +13,8 @@ namespace Cloud {
 		MOUSE_BUTTON_PRESSED, MOUSE_BUTTON_RELEASED, MOUSE_POSITION_CHANGED, MOUSE_SCROLLED
 	};
 
-	//filter for events, bitfield because you might want multiple categories for one event (use the | operator)
+	//filter for sorting events, bitfield because you might want multiple categories for one event
+	//not enum class because we want those bitwise operations
 	enum EventCategory {
 		NONE			= 0,
 		APPLICATION		= 1 << 0,

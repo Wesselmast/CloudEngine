@@ -5,11 +5,11 @@ class ExampleLayer : public Cloud::Layer {
 public:
 	ExampleLayer(const std::string& name = "Example") : Layer(name), name(name) {}
 	
-	void onUpdate() override { 
+	virtual void onUpdate() override {
 		CLD_INFO("Updating layer {0}", name);
 	}
 
-	void onEvent(Cloud::Event& event) override {
+	virtual void onEvent(Cloud::Event& event) override {
 		CLD_TRACE("{0}", event);
 	}
 private:
@@ -19,11 +19,16 @@ private:
 
 class App : public Cloud::Application {
 public:
-	App() {
+	virtual void begin() override {
 		pushLayer(new ExampleLayer("Application"));
 		pushOverlay(new Cloud::ImGuiLayer());
-	}
-	~App() {}
+		
+		CLD_WARN("Starting up the application");
+	} 
+
+	virtual void update() override {
+		CLD_ERROR(Cloud::Input::mousePressed(MOUSE_BTN_1));
+	} 
 };
 
 Cloud::Application* Cloud::createApplication() {

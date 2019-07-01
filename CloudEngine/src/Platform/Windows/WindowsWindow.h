@@ -19,6 +19,10 @@ namespace Cloud {
 		void update() override;
 		void setVSync(bool enabled) override;
 
+		inline virtual void* getNativeWindow() const override {
+			return window;
+		}
+
 		virtual ~WindowsWindow();
 	private:
 		virtual void init(const WindowProps& windowProps);
