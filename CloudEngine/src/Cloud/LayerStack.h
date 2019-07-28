@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Cloud/Core.h"
+
 #include "Layer.h"
 
 #include <vector>
@@ -8,9 +9,9 @@
 namespace Cloud {
 	typedef std::vector<Layer*>::iterator LayerIterator;
 
-	class CLOUD_API LayerStack {
+	class  LayerStack {
 	public:
-		LayerStack() : layerIterator(layers.begin()) {}
+		LayerStack() {}
 
 		void pushLayer(Layer* layer);
 		void pushOverlay(Layer* overlay);
@@ -25,6 +26,6 @@ namespace Cloud {
 		~LayerStack();
 	private:
 		std::vector<Layer*> layers;
-		LayerIterator layerIterator;
+		unsigned int index = 0;
 	};
 }

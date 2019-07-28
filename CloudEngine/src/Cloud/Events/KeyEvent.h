@@ -4,7 +4,7 @@
 
 namespace Cloud {
 
-	class CLOUD_API KeyEvent : public Event {
+	class  KeyEvent : public Event {
 	public:
 		inline int getKeyCode() const { return keyCode; }
 		EVENT_SET_CATEGORY(KEYBOARD | INPUT)
@@ -13,7 +13,7 @@ namespace Cloud {
 		int keyCode;
 	};
 
-	class CLOUD_API KeyPressedEvent : public KeyEvent {
+	class  KeyPressedEvent : public KeyEvent {
 	public:
 		KeyPressedEvent(int keyCode, int repeatCount) : KeyEvent(keyCode), repeatCount(repeatCount) {}
 		inline int getRepeatCount() const { return repeatCount; }
@@ -29,7 +29,7 @@ namespace Cloud {
 		int repeatCount;
 	};
 
-	class CLOUD_API KeyReleasedEvent : public KeyEvent {
+	class  KeyReleasedEvent : public KeyEvent {
 	public:
 		KeyReleasedEvent(int keyCode) : KeyEvent(keyCode) {}
 
@@ -42,7 +42,7 @@ namespace Cloud {
 		EVENT_SET_TYPE(KEY_RELEASED)
 	};
 
-	class CLOUD_API KeyTypedEvent : public KeyEvent {
+	class  KeyTypedEvent : public KeyEvent {
 	public:
 		KeyTypedEvent(int keyCode) : KeyEvent(keyCode) {}
 

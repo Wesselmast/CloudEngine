@@ -1,7 +1,6 @@
 #include "cldpch.h"
 #include "WindowsInput.h"
 
-
 #include <GLFW/glfw3.h>
 #include <Cloud/Application.h>
 
@@ -9,7 +8,7 @@ namespace Cloud {
 	Input* Input::instance = new WindowsInput();
 
 	bool WindowsInput::isKeyPressed(int keycode) {
-		bool state = glfwGetKey(static_cast<GLFWwindow*>(Application::get().getWindow().getNativeWindow()), keycode);
+		int state = glfwGetKey(static_cast<GLFWwindow*>(Application::get().getWindow().getNativeWindow()), keycode);
 		return state == GLFW_PRESS || state == GLFW_REPEAT;
 	}
 
@@ -18,10 +17,10 @@ namespace Cloud {
 		return state == GLFW_PRESS;
 	}
 
-	vec2 WindowsInput::getMousePos() {
+	glm::vec2 WindowsInput::getMousePos() {
 		double x, y;
 		glfwGetCursorPos(static_cast<GLFWwindow*>(Application::get().getWindow().getNativeWindow()), &x, &y);
-		return vec2(x, y);
+		return glm::vec2(x, y);
 	}
 	 
 	float WindowsInput::getMouseX() {

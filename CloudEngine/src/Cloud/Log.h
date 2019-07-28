@@ -6,7 +6,7 @@
 #include "spdlog/fmt/ostr.h"
 
 namespace Cloud {
-	class CLOUD_API Log {
+	class  Log {
 	public:
 		static void init();
 		inline static std::shared_ptr<spdlog::logger>& getCoreLogger() {

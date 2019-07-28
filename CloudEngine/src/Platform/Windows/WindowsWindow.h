@@ -1,6 +1,7 @@
 #pragma once
-
 #include "Cloud/Window.h"
+#include "Cloud/Rendering/Context.h"
+
 #include <GLFW/glfw3.h>
 
 namespace Cloud {
@@ -29,6 +30,7 @@ namespace Cloud {
 		virtual void shutdown();
 	private:
 		GLFWwindow* window;
+		Context* context;
 
 		struct WindowData {
 			std::string title;

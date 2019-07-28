@@ -7,8 +7,11 @@
 #include "Events/Event.h" 
 #include "Cloud/Events/ApplicationEvent.h"
 
+#include "Cloud/ImGui/ImGuiLayer.h"
+#include "Cloud/Rendering/Shader.h"
+
 namespace Cloud {
-	class CLOUD_API Application {
+	class Application {
 	public:
 		Application();
 		
@@ -30,8 +33,15 @@ namespace Cloud {
 		static Application* instance;
 		LayerStack layerStack;
 		std::unique_ptr<Window> window;
+		ImGuiLayer* imGuiLayer;
 		bool running = true;
 		float frameRate = 0;
+
+		unsigned int vertexArray;
+		unsigned int vertexBuffer;
+		unsigned int indexBuffer;
+
+		std::unique_ptr<Shader> shader;
 	};
 
 	Application* createApplication();

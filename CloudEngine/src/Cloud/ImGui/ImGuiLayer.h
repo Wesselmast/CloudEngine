@@ -7,15 +7,16 @@
 #include "Cloud/Events/KeyEvent.h"
 
 namespace Cloud {
-	class CLOUD_API ImGuiLayer : public Layer {
+	class  ImGuiLayer : public Layer {
 	public:
 		ImGuiLayer();
 
-		void onAttach();
-		void onDetach();
-		void onUpdate();
-		void onEvent(Event& event);
-	
+		virtual void onAttach() override;
+		virtual void onDetach() override;
+		virtual void onImGuiRender() override;
+
+		void begin();
+		void end();
 		~ImGuiLayer();
 	private:
 		float time = 0;

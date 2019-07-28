@@ -5,7 +5,7 @@
 #include "Cloud/Events/KeyEvent.h"
 #include "Cloud/Events/MouseEvent.h"
 
-#include <glad/glad.h>
+#include "Platform/OpenGL/OpenGLContext.h"
 
 namespace Cloud {
 	static bool firstTime = true;
@@ -39,11 +39,9 @@ namespace Cloud {
 
 		window = glfwCreateWindow((int)windowProps.width, (int)windowProps.height, data.title.c_str(), nullptr, nullptr);
 
-		//make context current on main thread to avoid pipeline flush
-		glfwMakeContextCurrent(window);
+		context = new OpenGLContext(window);
+		context->init();
 
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		CLD_CORE_ASSERT(status, "Could not initialize Glad!");
 		//make it so I can use the data struct when creating a callback to an event
 		//example: I want the width/height callback when resizing the window
 		glfwSetWindowUserPointer(window, &data);
@@ -128,7 +126,7 @@ namespace Cloud {
 
 	void WindowsWindow::update() {
 		glfwPollEvents();
-		glfwSwapBuffers(window);
+		context->swapBuffers();
 	}
 
 	void WindowsWindow::setVSync(bool enabled) {

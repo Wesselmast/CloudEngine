@@ -1,11 +1,7 @@
 #pragma once
 
 #ifdef CLD_PLATFORM_WINDOWS
-	#ifdef CLD_BUILD_DLL
-		#define CLOUD_API __declspec(dllexport)
-	#else
-		#define CLOUD_API __declspec(dllimport)
-	#endif
+	//windows specifics
 #else 
 	#error Cloud Engine only supports Windows!
 #endif
@@ -22,4 +18,4 @@
 	#define CLD_CORE_ASSERT(condition, ...)
 #endif
 
-#define BIND_EVENT_FUNC(func)std::bind(&func, this, std::placeholders::_1)
+#define BIND_EVENT_FUNC(func) std::bind(&func, this, std::placeholders::_1)

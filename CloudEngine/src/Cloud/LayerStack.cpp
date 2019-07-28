@@ -5,7 +5,8 @@ namespace Cloud {
 
 	//push layer into end of the stack, but before the overlays
 	void LayerStack::pushLayer(Layer* layer) {
-		layerIterator = layers.emplace(layerIterator, layer);
+		layers.emplace(layers.begin() + index, layer);
+		index++;
 	}
 
 	//push overlay into end of the stack, because they should be rendered on top of layers
@@ -17,7 +18,7 @@ namespace Cloud {
 		LayerIterator iterator = std::find(layers.begin(), layers.end(), layer);
 		if (iterator != layers.end()) {
 			layers.erase(iterator);
-			layerIterator--;
+			index--;
 		}
 	}
 

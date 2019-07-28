@@ -3,7 +3,7 @@
 #include "Event.h"
 
 namespace Cloud {
-	class CLOUD_API WindowResizeEvent : public Event {
+	class  WindowResizeEvent : public Event {
 	public:
 		WindowResizeEvent(unsigned int width, unsigned int height) : width(width), height(height) {}
 
@@ -23,7 +23,7 @@ namespace Cloud {
 		unsigned int height;
 	};
 
-	class CLOUD_API WindowCloseEvent : public Event {
+	class  WindowCloseEvent : public Event {
 	public:
 		WindowCloseEvent() {}
 
@@ -31,7 +31,7 @@ namespace Cloud {
 		EVENT_SET_TYPE(WINDOW_CLOSE)
 	};
 
-	class CLOUD_API AppTickEvent : public Event {
+	class  AppTickEvent : public Event {
 	public:
 		AppTickEvent() {}
 
@@ -39,7 +39,7 @@ namespace Cloud {
 		EVENT_SET_TYPE(APP_TICK)
 	};
 
-	class CLOUD_API AppUpdateEvent : public Event {
+	class  AppUpdateEvent : public Event {
 	public:
 		AppUpdateEvent() {}
 
@@ -47,7 +47,7 @@ namespace Cloud {
 		EVENT_SET_TYPE(APP_UPDATE)
 	};
 
-	class CLOUD_API AppRenderEvent : public Event {
+	class  AppRenderEvent : public Event {
 	public:
 		AppRenderEvent() {}
 

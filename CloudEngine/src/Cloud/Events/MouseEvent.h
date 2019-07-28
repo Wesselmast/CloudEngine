@@ -4,12 +4,12 @@
 
 namespace Cloud {
 
-	class CLOUD_API MousePositionChangedEvent : public Event {
+	class  MousePositionChangedEvent : public Event {
 	public:
-		MousePositionChangedEvent(float x, float y) : mouseX(x), mouseY(y) {}
+		MousePositionChangedEvent(double x, double y) : mouseX(x), mouseY(y) {}
 
-		inline float getX() const { return mouseX; }
-		inline float getY() const { return mouseY; }
+		inline double getX() const { return mouseX; }
+		inline double getY() const { return mouseY; }
 
 		std::string toString() const override {
 			std::stringstream ss;
@@ -20,16 +20,16 @@ namespace Cloud {
 		EVENT_SET_TYPE(MOUSE_POSITION_CHANGED)
 		EVENT_SET_CATEGORY(MOUSE | INPUT)
 	private:
-		float mouseX;
-		float mouseY;
+		double mouseX;
+		double mouseY;
 	};
 
-	class CLOUD_API MouseScrolledEvent : public Event {
+	class  MouseScrolledEvent : public Event {
 	public:
-		MouseScrolledEvent(float x, float y) : offsetX(x), offsetY(y) {}
+		MouseScrolledEvent(double x, double y) : offsetX(x), offsetY(y) {}
 
-		inline float getXOffset() const { return offsetX; }
-		inline float getYOffset() const { return offsetY; }
+		inline double getXOffset() const { return offsetX; }
+		inline double getYOffset() const { return offsetY; }
 
 		std::string toString() const override {
 			std::stringstream ss;
@@ -41,11 +41,11 @@ namespace Cloud {
 		EVENT_SET_CATEGORY(MOUSE | INPUT)
 	private:
 		//some mice have horizontal scrolling
-		float offsetX;
-		float offsetY;
+		double offsetX;
+		double offsetY;
 	};
 
-	class CLOUD_API MouseButtonEvent : public Event {
+	class  MouseButtonEvent : public Event {
 	public:
 		inline int getMouseButton() const { return mouseButton; }
 		EVENT_SET_CATEGORY(MOUSE | INPUT)
@@ -54,7 +54,7 @@ namespace Cloud {
 		int mouseButton;
 	};
 
-	class CLOUD_API MouseButtonPressedEvent : public MouseButtonEvent {
+	class  MouseButtonPressedEvent : public MouseButtonEvent {
 	public:
 		MouseButtonPressedEvent(int mouseButton) : MouseButtonEvent(mouseButton) {}
 
@@ -67,7 +67,7 @@ namespace Cloud {
 		EVENT_SET_TYPE(MOUSE_BUTTON_PRESSED)
 	};
 
-	class CLOUD_API MouseButtonReleasedEvent : public MouseButtonEvent {
+	class  MouseButtonReleasedEvent : public MouseButtonEvent {
 	public:
 		MouseButtonReleasedEvent(int mouseButton) : MouseButtonEvent(mouseButton) {}
 
