@@ -140,6 +140,11 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Cloud\Rendering\Buffers\BufferLayout.h" />
+    <ClInclude Include="src\Cloud\Rendering\VertexArray.h" />
+    <ClInclude Include="src\Platform\OpenGL\Buffers\OpenGLIndexBuffer.h" />
+    <ClInclude Include="src\Cloud\Rendering\Renderer.h" />
+    <ClInclude Include="src\Platform\OpenGL\Buffers\OpenGLVertexBuffer.h" />
     <ClInclude Include="src\Cloud\Application.h" />
     <ClInclude Include="src\Cloud\Core.h" />
     <ClInclude Include="src\Cloud\EntryPoint.h" />
@@ -153,11 +158,16 @@
     <ClInclude Include="src\Cloud\Layer.h" />
     <ClInclude Include="src\Cloud\LayerStack.h" />
     <ClInclude Include="src\Cloud\Log.h" />
+    <ClInclude Include="src\Cloud\Rendering\Buffers\Buffer.h" />
+    <ClInclude Include="src\Cloud\Rendering\Buffers\IndexBuffer.h" />
+    <ClInclude Include="src\Cloud\Rendering\Buffers\VertexBuffer.h" />
     <ClInclude Include="src\Cloud\Rendering\Context.h" />
     <ClInclude Include="src\Cloud\Rendering\Shader.h" />
     <ClInclude Include="src\Cloud\Window.h" />
     <ClInclude Include="src\CloudEngine.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\cldpch.h" />
@@ -527,13 +537,21 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Cloud\Rendering\VertexArray.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\Buffers\OpenGLIndexBuffer.cpp" />
+    <ClCompile Include="src\Cloud\Rendering\Renderer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\Buffers\OpenGLVertexBuffer.cpp" />
     <ClCompile Include="src\Cloud\Application.cpp" />
     <ClCompile Include="src\Cloud\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Cloud\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Cloud\LayerStack.cpp" />
     <ClCompile Include="src\Cloud\Log.cpp" />
+    <ClCompile Include="src\Cloud\Rendering\Buffers\IndexBuffer.cpp" />
+    <ClCompile Include="src\Cloud\Rendering\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="src\Cloud\Rendering\Shader.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\cldpch.cpp">
@@ -550,6 +568,9 @@
     <ProjectReference Include="vendor\imgui\ImGui.vcxproj">
       <Project>{C0FF640D-2C14-8DBE-F595-301E616989EF}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\CloudIco.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

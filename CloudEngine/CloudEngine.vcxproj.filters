@@ -1188,9 +1188,19 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Cloud\Rendering\Context.h" />
     <ClInclude Include="src\Cloud\Rendering\Shader.h" />
+    <ClInclude Include="src\Cloud\Rendering\Buffers\VertexBuffer.h" />
+    <ClInclude Include="src\Cloud\Rendering\Buffers\IndexBuffer.h" />
+    <ClInclude Include="src\Cloud\Rendering\Buffers\Buffer.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\Platform\OpenGL\Buffers\OpenGLVertexBuffer.h" />
+    <ClInclude Include="src\Cloud\Rendering\Renderer.h" />
+    <ClInclude Include="src\Platform\OpenGL\Buffers\OpenGLIndexBuffer.h" />
+    <ClInclude Include="src\Cloud\Rendering\VertexArray.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="src\Cloud\Rendering\Buffers\BufferLayout.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Cloud\Application.cpp">
@@ -1217,7 +1227,18 @@
     <ClCompile Include="src\cldpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Cloud\Rendering\Shader.cpp" />
+    <ClCompile Include="src\Cloud\Rendering\Buffers\VertexBuffer.cpp" />
+    <ClCompile Include="src\Cloud\Rendering\Buffers\IndexBuffer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\Buffers\OpenGLVertexBuffer.cpp" />
+    <ClCompile Include="src\Cloud\Rendering\Renderer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\Buffers\OpenGLIndexBuffer.cpp" />
+    <ClCompile Include="src\Cloud\Rendering\VertexArray.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\CloudIco.ico" />
   </ItemGroup>
 </Project>

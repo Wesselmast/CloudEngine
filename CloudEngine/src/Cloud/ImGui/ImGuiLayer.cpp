@@ -47,10 +47,6 @@ namespace Cloud {
 	}
 
 	void ImGuiLayer::onImGuiRender() {
-		ImGui::StyleColorsDark();
-		ImGui::Begin("Engine Popup");
-		ImGui::Text("This line was written in the engine itself!");
-		ImGui::End();
 	}
 
 	void ImGuiLayer::begin() {

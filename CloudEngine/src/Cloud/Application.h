@@ -9,6 +9,9 @@
 
 #include "Cloud/ImGui/ImGuiLayer.h"
 #include "Cloud/Rendering/Shader.h"
+#include "Cloud/Rendering/Buffers/VertexBuffer.h"
+#include "Cloud/Rendering/Buffers/IndexBuffer.h"
+#include "Cloud/Rendering/VertexArray.h"
 
 namespace Cloud {
 	class Application {
@@ -35,13 +38,11 @@ namespace Cloud {
 		std::unique_ptr<Window> window;
 		ImGuiLayer* imGuiLayer;
 		bool running = true;
-		float frameRate = 0;
 
-		unsigned int vertexArray;
-		unsigned int vertexBuffer;
-		unsigned int indexBuffer;
-
-		std::unique_ptr<Shader> shader;
+		std::shared_ptr<Shader> shader;
+		std::shared_ptr<VertexBuffer> vertexBuffer;
+		std::shared_ptr<VertexArray> vertexArray;
+		std::shared_ptr<IndexBuffer> indexBuffer;
 	};
 
 	Application* createApplication();

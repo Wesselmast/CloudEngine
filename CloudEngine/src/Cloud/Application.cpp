@@ -9,50 +9,53 @@ namespace Cloud {
 
 	Application::Application() {
 		instance = this;
-		WindowProps props("CloudEngine v0.0  | FPS: " + std::to_string(frameRate));
+		WindowProps props;
 		window = std::unique_ptr<Window>(Window::create());
 		window->setEventCallback(BIND_EVENT_FUNC(Application::onEvent));
 
 		imGuiLayer = new ImGuiLayer();
 		pushOverlay(imGuiLayer);
 
-		glGenVertexArrays(1, &vertexArray);
-		glBindVertexArray(vertexArray);
-
-		glGenBuffers(1, &vertexBuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-
-		float vertexPostitions[] = {
-			-0.5f, -0.5f,
-			 0.5f, -0.5f,
-			 0.5f,  0.5f,
-			-0.5f,  0.5f,
+		float vertices[] = {
+			 0.0f,   0.75f, 1.0f, 0.0f, 0.5f, 0.0f,
+			 0.5f,   0.0f,	1.0f, 1.0f, 1.0f, 0.0f,
+			 0.25f, -0.75f, 0.5f, 0.0f, 1.0f, 0.0f,
+			-0.25f, -0.75f, 0.5f, 0.0f, 1.0f, 0.0f,
+			-0.5f,   0.0f,	1.0f, 1.0f, 1.0f, 0.0f
 		};
-
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertexPostitions), vertexPostitions, GL_STATIC_DRAW);
-
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, (const void*)0);
-
-		glGenBuffers(1, &indexBuffer);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
 
 		unsigned int indices[] = {
 			0, 1, 2,
-			2, 3, 0
+			0, 2, 3,
+			0, 3, 4
 		};
 
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+		vertexArray.reset(VertexArray::create());
+		vertexBuffer.reset(VertexBuffer::create(vertices, sizeof(vertices)));
+
+		BufferLayout layout = {
+			{ ShaderDataType::FLOAT2, "aPosition" },
+			{ ShaderDataType::FLOAT4, "aColor" }
+		};
+
+		vertexBuffer->setLayout(layout);
+		indexBuffer.reset(IndexBuffer::create(indices, sizeof(indices) / sizeof(unsigned int)));
+
+		vertexArray->addVertexBuffer(vertexBuffer);
+		vertexArray->setIndexBuffer(indexBuffer);
 		
 		const char* vertexSrc = R"(
 			#version 330 core
 
 			layout(location = 0) in vec2 aPosition;
+			layout(location = 1) in vec4 aColor;
 
 			out vec2 vPosition;
+			out vec4 vColor;
 
 			void main()  {
 				vPosition = aPosition;
+				vColor = aColor;
 				gl_Position = vec4(aPosition, 0.0, 1.0);
 			}
 		)";
@@ -63,23 +66,35 @@ namespace Cloud {
 			layout(location = 0) out vec4 oColor;
 
 			in vec2 vPosition;
+			in vec4 vColor;
+			uniform float uRed;
 
 			void main()  {
-				oColor = vec4(vPosition * -0.5 + 0.5, 0.5, 1.0);
+				oColor = vColor * (uRed + 0.5); //vec4(vPosition * -0.5 + uRed, 0.5, 1.0);
 			}
 		)";
 		
-		shader.reset(new Shader(vertexSrc, pixelSrc));
+		shader.reset(Shader::create(vertexSrc, pixelSrc));
 	}
 
 	void Application::run() {
 		begin();
 
+		double deltaTime = 0.0f;
+		double time = 0.0f;
+
 		while (running) {
+			clock_t beginFrame = clock();
+
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			shader->bind();
-			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+			vertexArray->bind();
+
+			int uRed = shader->getUniformLocation("uRed");
+			glUniform1f(uRed, sin(time) * 0.5 + 0.5);
+			glDrawElements(GL_TRIANGLES, vertexArray->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
+			
 
 			for (Layer* layer : layerStack) {
 				layer->onUpdate();
@@ -93,6 +108,14 @@ namespace Cloud {
 
 			update();
 			window->update();
+
+			//frame rate calculation
+			deltaTime = (clock() - beginFrame) / (double)CLOCKS_PER_SEC;
+			time += deltaTime;
+			
+			if (deltaTime > 0.0) {
+				CLD_CORE_TRACE("Framerate: {0}", 1 / deltaTime);
+			}
 		}
 	}
 
@@ -102,7 +125,7 @@ namespace Cloud {
 
 		for (LayerIterator iterator = layerStack.end(); iterator != layerStack.begin();) {
 			(*--iterator)->onEvent(event);
-			if (event.Handled) break;
+			if (event.handled) break;
 		}
 	}
 
@@ -121,6 +144,5 @@ namespace Cloud {
 		return true;
 	}
 
-	Application::~Application() {
-	}
+	Application::~Application() = default;
 }

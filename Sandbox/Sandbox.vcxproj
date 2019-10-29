@@ -138,6 +138,15 @@
       <Project>{923AE2BD-FEEF-5AB3-87E4-548AF39851B7}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\CloudIco.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resources\CloudIco.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\CloudIco.aps" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

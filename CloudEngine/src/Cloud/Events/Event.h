@@ -32,7 +32,7 @@ namespace Cloud {
 	
 #define EVENT_SET_CATEGORY(category) virtual int getCategoryFlags() const override { return category; }
 
-	class  Event {
+	class Event {
 	public:
 		virtual EventType getEventType() const = 0;
 		virtual const char* getName() const = 0;
@@ -42,7 +42,7 @@ namespace Cloud {
 			return getCategoryFlags() & category;
 		}
 	public:
-		bool Handled = false;
+		bool handled = false;
 	};
 
 	class EventDispatcher {
@@ -56,7 +56,7 @@ namespace Cloud {
 			if (event.getEventType() != T::getType()) {
 				return false;
 			}
-			event.Handled = func(*(T*)&event);
+			event.handled = func(*(T*)&event);
 			return true;
 		}
 	private:

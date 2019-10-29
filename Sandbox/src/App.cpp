@@ -7,18 +7,11 @@ public:
 	ExampleLayer(const std::string& name = "Example") : Layer(name), name(name) {}
 	
 	virtual void onUpdate() override {
-		CLD_INFO("Updating layer {0}", name);
 	}
 
 	virtual void onImGuiRender() override {
-		ImGui::Begin("User window");
-		ImGui::Text("Hello World!");		
-		ImGui::NewLine();
-		ImGui::Text("This line was written by the user!\nHmm this UI could be cooler! >:D");
-		ImGui::End();
-
 		ImGui::Begin("PRESS TAB");
-		ImGui::Text((const char*)thingy.c_str());
+		ImGui::Text(thingy.c_str());
 		ImGui::End();
 	}
 

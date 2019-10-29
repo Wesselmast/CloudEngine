@@ -1,11 +1,12 @@
 #include "cldpch.h"
-#include "Shader.h"
+#include "VertexArray.h"
 
 #include "Renderer.h"
-#include "Platform/OpenGL/OpenGLShader.h"
+
+#include "Platform/OpenGL/OpenGLVertexArray.h"
 
 namespace Cloud {
-	Shader* Shader::create(const char *& vertexSrc, const char *& pixelSrc) {
+	VertexArray * VertexArray::create() {
 		switch (Renderer::getCurrentAPI()) {
 		case RendererAPI::NONE:
 		{
@@ -14,7 +15,7 @@ namespace Cloud {
 		}
 		case RendererAPI::OPENGL:
 		{
-			return new OpenGLShader(vertexSrc, pixelSrc);
+			return new OpenGLVertexArray();
 		}
 		}
 		CLD_CORE_ASSERT(false, "RendererAPI is unknown");

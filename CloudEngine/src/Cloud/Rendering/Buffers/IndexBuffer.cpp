@@ -1,11 +1,11 @@
 #include "cldpch.h"
-#include "Shader.h"
 
-#include "Renderer.h"
-#include "Platform/OpenGL/OpenGLShader.h"
+#include "IndexBuffer.h"
+
+#include "Platform/OpenGL/Buffers/OpenGLIndexBuffer.h"
 
 namespace Cloud {
-	Shader* Shader::create(const char *& vertexSrc, const char *& pixelSrc) {
+	IndexBuffer* IndexBuffer::create(unsigned int* indices, unsigned int count) {
 		switch (Renderer::getCurrentAPI()) {
 		case RendererAPI::NONE:
 		{
@@ -14,7 +14,7 @@ namespace Cloud {
 		}
 		case RendererAPI::OPENGL:
 		{
-			return new OpenGLShader(vertexSrc, pixelSrc);
+			return new OpenGLIndexBuffer(indices, count);
 		}
 		}
 		CLD_CORE_ASSERT(false, "RendererAPI is unknown");

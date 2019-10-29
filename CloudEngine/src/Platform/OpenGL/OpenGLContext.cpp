@@ -11,6 +11,7 @@ namespace Cloud {
 	void OpenGLContext::init() {
 		//make context current on main thread to avoid pipeline flush
 		glfwMakeContextCurrent(window);
+		//glfwSwapInterval(1);
 
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		CLD_CORE_ASSERT(status, "Could not initialize Glad!");
