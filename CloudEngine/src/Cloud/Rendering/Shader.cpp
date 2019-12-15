@@ -7,17 +7,17 @@
 namespace Cloud {
 	Shader* Shader::create(const char *& vertexSrc, const char *& pixelSrc) {
 		switch (Renderer::getCurrentAPI()) {
-		case RendererAPI::NONE:
+		case RendererAPI::API::NONE:
 		{
-			CLD_CORE_ASSERT(false, "RendererAPI is NONE");
+			CLD_CORE_ASSERT(false, "API is NONE");
 			return nullptr;
 		}
-		case RendererAPI::OPENGL:
+		case RendererAPI::API::OPENGL:
 		{
 			return new OpenGLShader(vertexSrc, pixelSrc);
 		}
 		}
-		CLD_CORE_ASSERT(false, "RendererAPI is unknown");
+		CLD_CORE_ASSERT(false, "API is unknown");
 		return nullptr;
 	}
 }

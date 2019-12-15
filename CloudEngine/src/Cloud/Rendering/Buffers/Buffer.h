@@ -1,8 +1,5 @@
 #pragma once
 
-#include "Cloud/Rendering/Renderer.h"
-#include "Cloud/Rendering/Buffers/BufferLayout.h"
-
 namespace Cloud {
 	class Buffer {
 	public:

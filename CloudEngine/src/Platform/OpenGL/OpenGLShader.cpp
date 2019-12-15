@@ -3,6 +3,8 @@
 
 #include "glad/glad.h"
 
+#include "glm/gtc/type_ptr.hpp"
+
 namespace Cloud {
 
 	OpenGLShader::OpenGLShader(const char *& vertexSrc, const char *& pixelSrc) {
@@ -77,9 +79,22 @@ namespace Cloud {
 		return glGetUniformLocation(rendererID, "uRed");
 	}
 
+	void OpenGLShader::uploadUniformMat4(const std::string& name, const glm::mat4& matrix) const {
+		GLint location = glGetUniformLocation(rendererID, name.c_str());
+		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+	}
+
+	void OpenGLShader::uploadUniformF1(const std::string& name, const float& value) const {
+		GLint location = glGetUniformLocation(rendererID, name.c_str());
+		glUniform1f(location, value);
+	}
+
+	void OpenGLShader::uploadUniformVec4(const std::string& name, const glm::vec4& vector) const {
+		GLint location = glGetUniformLocation(rendererID, name.c_str());
+		glUniform4fv(location, 1, glm::value_ptr(vector));
+	}
+
 	OpenGLShader::~OpenGLShader() {
 		glDeleteProgram(rendererID);
 	}
-
-
 }

@@ -1201,6 +1201,10 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\Cloud\Rendering\Buffers\BufferLayout.h" />
+    <ClInclude Include="src\Cloud\Rendering\RendererAPI.h" />
+    <ClInclude Include="src\Cloud\Rendering\RenderCommand.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
+    <ClInclude Include="src\Cloud\Rendering\OrthoCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Cloud\Application.cpp">
@@ -1237,6 +1241,10 @@
     <ClCompile Include="src\Cloud\Rendering\VertexArray.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="src\Cloud\Rendering\RendererAPI.cpp" />
+    <ClCompile Include="src\Cloud\Rendering\RenderCommand.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="src\Cloud\Rendering\OrthoCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\CloudIco.ico" />

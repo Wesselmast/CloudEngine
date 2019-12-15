@@ -1,16 +1,26 @@
 #pragma once
 
-namespace Cloud {
-	enum class RendererAPI {
-		NONE, OPENGL
-	};
+#include "RenderCommand.h"
+#include "OrthoCamera.h"
+#include "Shader.h"
 
+namespace Cloud {
 	class Renderer {
 	public:
-		inline static RendererAPI getCurrentAPI() { 
-			return rendererAPI;
+		static void beginScene(OrthoCamera& camera);
+		static void endScene();
+
+		static void submit(const std::shared_ptr<VertexArray>& vertexArray, const std::shared_ptr<Shader>& shader);
+
+		
+		inline static RendererAPI::API getCurrentAPI() { 
+			return RendererAPI::getAPI();
 		}
 	private:
-		static RendererAPI rendererAPI;
+		struct SceneData {
+			glm::mat4 viewProjectionMatrix;
+		};
+
+		static SceneData* sceneData;
 	};
 }
