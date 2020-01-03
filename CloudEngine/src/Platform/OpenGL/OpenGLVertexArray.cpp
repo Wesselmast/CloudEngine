@@ -41,7 +41,6 @@ namespace Cloud {
 		glBindVertexArray(rendererID);
 		vertexBuffer->bind();
 
-
 		unsigned int index = 0;
 		const BufferLayout& layout = vertexBuffer->getLayout();
 		

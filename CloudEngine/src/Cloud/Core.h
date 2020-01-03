@@ -19,3 +19,5 @@
 #endif
 
 #define BIND_EVENT_FUNC(func) std::bind(&func, this, std::placeholders::_1)
+
+#define FULLSCREEN 0

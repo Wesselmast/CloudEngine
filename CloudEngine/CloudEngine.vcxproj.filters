@@ -1205,6 +1205,7 @@
     <ClInclude Include="src\Cloud\Rendering\RenderCommand.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\Cloud\Rendering\OrthoCamera.h" />
+    <ClInclude Include="src\Cloud\Rendering\PerspectiveCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Cloud\Application.cpp">
@@ -1245,6 +1246,7 @@
     <ClCompile Include="src\Cloud\Rendering\RenderCommand.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\Cloud\Rendering\OrthoCamera.cpp" />
+    <ClCompile Include="src\Cloud\Rendering\PerspectiveCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\CloudIco.ico" />

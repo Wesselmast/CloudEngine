@@ -17,5 +17,6 @@
 #include "Cloud/Rendering/Buffers/IndexBuffer.h"
 #include "Cloud/Rendering/VertexArray.h"
 #include "Cloud/Rendering/OrthoCamera.h"
+#include "Cloud/Rendering/PerspectiveCamera.h"
 
 #include "Cloud/EntryPoint.h"

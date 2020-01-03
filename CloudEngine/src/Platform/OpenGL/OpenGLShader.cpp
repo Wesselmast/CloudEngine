@@ -66,8 +66,8 @@ namespace Cloud {
 
 			CLD_CORE_ERROR("{0}", infoLog.data());
 			switch (type) {
-			case GL_VERTEX_SHADER:   CLD_CORE_ASSERT(false, "Vertex shader failed compiling");
-			case GL_FRAGMENT_SHADER: CLD_CORE_ASSERT(false, "Pixel shader failed compiling");
+				case GL_VERTEX_SHADER:   CLD_CORE_ASSERT(false, "Vertex shader failed compiling");
+				case GL_FRAGMENT_SHADER: CLD_CORE_ASSERT(false, "Pixel shader failed compiling");
 			}
 
 			return shader;

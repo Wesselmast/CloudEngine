@@ -2,6 +2,7 @@
 #include "Application.h"
 
 #include "Cloud/Input.h"
+#include "GLFW/glfw3.h"
 
 namespace Cloud {
 	Application* Application::instance = nullptr;
@@ -11,15 +12,23 @@ namespace Cloud {
 		WindowProps props;
 		window = std::unique_ptr<Window>(Window::create());
 		window->setEventCallback(BIND_EVENT_FUNC(Application::onEvent));
+		window->setVSync(false);
 
 		imGuiLayer = new ImGuiLayer();
 		pushOverlay(imGuiLayer);
 	}
 
 	void Application::run() {
+		double lastTime = 0.0;
+		
 		while (running) {
+			//frame rate calculation
+			const double time = glfwGetTime();
+			const double deltaTime = time - lastTime;
+			lastTime = time;
+			
 			for (Layer* layer : layerStack) {
-				layer->onUpdate();
+				layer->onUpdate(deltaTime, time);
 			}
 			imGuiLayer->begin();
 			for (Layer* layer : layerStack) {
@@ -27,6 +36,8 @@ namespace Cloud {
 			}
 			imGuiLayer->end();
 			window->update();
+			
+			CLD_CORE_TRACE("Framerate: {0}", 1 / (deltaTime == 0 ? 0.0001 : deltaTime));
 		}
 	}
 

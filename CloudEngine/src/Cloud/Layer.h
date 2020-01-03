@@ -10,7 +10,7 @@ namespace Cloud {
 
 		virtual void onAttach() {}
 		virtual void onDetach() {}
-		virtual void onUpdate() {}
+		virtual void onUpdate(const float deltaTime, const float time) {}
 		virtual void onImGuiRender() {}
 
 		virtual void onEvent(Event& event) {}

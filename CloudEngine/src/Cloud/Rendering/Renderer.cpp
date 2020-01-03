@@ -5,7 +5,7 @@ namespace Cloud {
 	Renderer::SceneData* Renderer::sceneData = new SceneData;
 	
 	//makes sure the shaders I have get the right uniforms
-	void Renderer::beginScene(OrthoCamera& camera) {
+	void Renderer::beginScene(PerspectiveCamera& camera) {
 		sceneData->viewProjectionMatrix = camera.getViewProjectionMatrix();
 	}
 
