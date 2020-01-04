@@ -16,6 +16,8 @@ namespace Cloud {
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		CLD_CORE_ASSERT(status, "Could not initialize Glad!");
 
+		glEnable(GL_DEPTH_TEST);
+
 		if (FULLSCREEN) {
 			GLFWmonitor* monitor = glfwGetPrimaryMonitor();
 			const GLFWvidmode* mode = glfwGetVideoMode(monitor);

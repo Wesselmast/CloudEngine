@@ -2,7 +2,7 @@
 
 #include "glm/glm.hpp"
 
-namespace Cloud {
+namespace Cloud {	
 	class PerspectiveCamera {
 	public:
 		PerspectiveCamera(float fov, float aspect, float zNear, float zFar);

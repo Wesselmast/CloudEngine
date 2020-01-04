@@ -1,8 +1,9 @@
-#include "cldpch.h"
+﻿#include "cldpch.h"
 #include "Application.h"
 
 #include "Cloud/Input.h"
 #include "GLFW/glfw3.h"
+#include <glad/glad.h>
 
 namespace Cloud {
 	Application* Application::instance = nullptr;
@@ -13,7 +14,8 @@ namespace Cloud {
 		window = std::unique_ptr<Window>(Window::create());
 		window->setEventCallback(BIND_EVENT_FUNC(Application::onEvent));
 		window->setVSync(false);
-
+		
+		CLD_CORE_WARN("{0}", glGetString(GL_RENDERER));
 		imGuiLayer = new ImGuiLayer();
 		pushOverlay(imGuiLayer);
 	}
@@ -36,7 +38,7 @@ namespace Cloud {
 			}
 			imGuiLayer->end();
 			window->update();
-			
+
 			CLD_CORE_TRACE("Framerate: {0}", 1 / (deltaTime == 0 ? 0.0001 : deltaTime));
 		}
 	}

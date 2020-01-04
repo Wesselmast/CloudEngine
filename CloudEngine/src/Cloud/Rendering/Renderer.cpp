@@ -12,9 +12,10 @@ namespace Cloud {
 	void Renderer::endScene() {
 	}
 
-	void Renderer::submit(const std::shared_ptr<VertexArray>& vertexArray, const std::shared_ptr<Shader>& shader) {
+	void Renderer::submit(const std::shared_ptr<VertexArray>& vertexArray, const std::shared_ptr<Shader>& shader, const glm::mat4& transform) {
 		shader->bind();
 		shader->uploadUniformMat4("uViewProjection", sceneData->viewProjectionMatrix);
+		shader->uploadUniformMat4("uTransform", transform);
 
 		vertexArray->bind();
 		RenderCommand::drawIndexed(vertexArray);

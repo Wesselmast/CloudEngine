@@ -5,7 +5,7 @@
 #include "Platform/OpenGL/OpenGLShader.h"
 
 namespace Cloud {
-	Shader* Shader::create(const char *& vertexSrc, const char *& pixelSrc) {
+	Shader* Shader::create(const std::string& path) {
 		switch (Renderer::getCurrentAPI()) {
 		case RendererAPI::API::NONE:
 		{
@@ -14,7 +14,7 @@ namespace Cloud {
 		}
 		case RendererAPI::API::OPENGL:
 		{
-			return new OpenGLShader(vertexSrc, pixelSrc);
+			return new OpenGLShader(path);
 		}
 		}
 		CLD_CORE_ASSERT(false, "API is unknown");
