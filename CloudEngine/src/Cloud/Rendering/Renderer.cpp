@@ -20,4 +20,13 @@ namespace Cloud {
 		vertexArray->bind();
 		RenderCommand::drawIndexed(vertexArray);
 	}
+
+	void Renderer::submitMesh(const std::shared_ptr<VertexArray>& vertexArray, const std::shared_ptr<Shader>& shader, const std::shared_ptr<Mesh>& mesh) {
+		shader->bind();
+		shader->uploadUniformMat4("uViewProjection", sceneData->viewProjectionMatrix);
+		shader->uploadUniformMat4("uTransform", mesh->transform);
+
+		vertexArray->bind();
+		RenderCommand::drawIndexedMesh(mesh);
+	}
 }

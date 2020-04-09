@@ -5,6 +5,6 @@ namespace Cloud {
 	class IndexBuffer : public Buffer {
 	public:
 		virtual inline unsigned int getCount() const = 0;
-		static IndexBuffer* create(unsigned int* indices, unsigned int count);
+		static IndexBuffer* create(const void* indices, unsigned int count);
 	};
 }

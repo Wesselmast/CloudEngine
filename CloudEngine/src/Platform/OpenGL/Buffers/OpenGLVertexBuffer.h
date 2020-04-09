@@ -6,7 +6,7 @@ namespace Cloud {
 
 	class OpenGLVertexBuffer : public VertexBuffer {
 	public:
-		OpenGLVertexBuffer(float* vertices, unsigned int size);
+		OpenGLVertexBuffer(const void* vertices, unsigned int size);
 
 		virtual void bind() const override;
 		virtual void unbind() const override;

@@ -12,4 +12,8 @@ namespace Cloud {
 	void OpenGLRendererAPI::drawIndexed(const std::shared_ptr<VertexArray>& vertexArray) {
 		glDrawElements(GL_TRIANGLES, vertexArray->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
 	}
+
+	void OpenGLRendererAPI::drawIndexedMesh(const std::shared_ptr<Mesh>& mesh) {
+		glDrawElementsBaseVertex(GL_TRIANGLES, mesh->indexCount, GL_UNSIGNED_INT, (void*)(sizeof(uint32_t) * mesh->baseIndex), mesh->baseVertex);
+	}
 }

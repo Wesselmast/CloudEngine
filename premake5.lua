@@ -15,6 +15,7 @@ IncludeDir["glfw"] = "CloudEngine/vendor/glfw/include"
 IncludeDir["glad"] = "CloudEngine/vendor/glad/include"
 IncludeDir["imgui"] = "CloudEngine/vendor/imgui"
 IncludeDir["glm"] = "CloudEngine/vendor/glm"
+IncludeDir["assimp"] = "CloudEngine/vendor/assimp/include"
 
 group "Dependencies"
 	include "CloudEngine/vendor/glfw"
@@ -54,6 +55,7 @@ project "CloudEngine"
 		"%{IncludeDir.glad}",
 		"%{IncludeDir.imgui}",
 		"%{IncludeDir.glm}",
+		"%{IncludeDir.assimp}"
 	}
 
 	links {
@@ -106,7 +108,8 @@ project "Sandbox"
 		"CloudEngine/vendor/spdlog/include",
 		"CloudEngine/src",
 		"CloudEngine/vendor",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.assimp}"
 	}
 
 	links {
@@ -125,13 +128,34 @@ project "Sandbox"
 		runtime "Debug"
 		symbols "On"
 
+		links {
+			"CloudEngine/vendor/assimp/bin/Debug/assimp-vc141-mtd.lib"
+		}
+		postbuildcommands {	
+			'{COPY} "../CloudEngine/vendor/assimp/bin/Debug/assimp-vc141-mtd.dll" "%{cfg.targetdir}"'
+		}
+
 	filter "configurations:Release"
 		defines "CLD_RELEASE"
 		runtime "Release"
 		optimize "On"
 
+		links {
+			"CloudEngine/vendor/assimp/bin/Release/assimp-vc141-mtd.lib"
+		}
+		postbuildcommands {	
+			'{COPY} "../CloudEngine/vendor/assimp/bin/Release/assimp-vc141-mtd.dll" "%{cfg.targetdir}"'
+		}
+
 	filter "configurations:Dist"
 		defines "CLD_DIST"
 		runtime "Release"
 		optimize "On"
+
+		links {
+			"CloudEngine/vendor/assimp/bin/Release/assimp-vc141-mtd.lib"
+		}
+		postbuildcommands {	
+			'{COPY} "../CloudEngine/vendor/assimp/bin/Release/assimp-vc141-mtd.dll" "%{cfg.targetdir}"'
+		}
 	

@@ -7,7 +7,7 @@
 
 
 namespace Cloud {
-	IndexBuffer* IndexBuffer::create(unsigned int* indices, unsigned int count) {
+	IndexBuffer* IndexBuffer::create(const void* indices, unsigned int count) {
 		switch (Renderer::getCurrentAPI()) {
 		case RendererAPI::API::NONE:
 		{

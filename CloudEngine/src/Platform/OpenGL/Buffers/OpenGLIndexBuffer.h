@@ -5,7 +5,7 @@
 namespace Cloud {
 	class OpenGLIndexBuffer : public IndexBuffer {
 	public:
-		OpenGLIndexBuffer(unsigned int* indices, unsigned int count);
+		OpenGLIndexBuffer(const void* indices, unsigned int count);
 
 		virtual inline unsigned int getCount() const override { 
 			return count; 

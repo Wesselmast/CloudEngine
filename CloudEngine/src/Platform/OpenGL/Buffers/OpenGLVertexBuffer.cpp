@@ -4,7 +4,7 @@
 #include "glad/glad.h"
 
 namespace Cloud {
-	OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, unsigned int size) {
+	OpenGLVertexBuffer::OpenGLVertexBuffer(const void* vertices, unsigned int size) {
 		glCreateBuffers(1, &rendererID);
 		glBindBuffer(GL_ARRAY_BUFFER, rendererID);
 		glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);

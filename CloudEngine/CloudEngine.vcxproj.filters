@@ -13,8 +13,20 @@
     <Filter Include="src\Cloud\ImGui">
       <UniqueIdentifier>{3D20D09F-A9AB-3D64-B2BC-C0581EC79964}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Cloud\Rendering">
+      <UniqueIdentifier>{E0C5F097-4C27-CEA5-D594-145841F50465}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Cloud\Rendering\Buffers">
+      <UniqueIdentifier>{5C65BD88-C872-EB6E-5159-E759BD65B725}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Platform">
       <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Platform\OpenGL">
+      <UniqueIdentifier>{35A49437-A105-7245-2A73-B8F796D3A804}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Platform\OpenGL\Buffers">
+      <UniqueIdentifier>{B1C8B0B2-1DD6-DE98-A6BC-DA8312C9AA4F}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Platform\Windows">
       <UniqueIdentifier>{5B054582-4794-CE4B-F0B2-E246DC20DFF1}</UniqueIdentifier>
@@ -81,11 +93,65 @@
     <ClInclude Include="src\Cloud\Log.h">
       <Filter>src\Cloud</Filter>
     </ClInclude>
+    <ClInclude Include="src\Cloud\Rendering\Buffers\Buffer.h">
+      <Filter>src\Cloud\Rendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cloud\Rendering\Buffers\BufferLayout.h">
+      <Filter>src\Cloud\Rendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cloud\Rendering\Buffers\IndexBuffer.h">
+      <Filter>src\Cloud\Rendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cloud\Rendering\Buffers\VertexBuffer.h">
+      <Filter>src\Cloud\Rendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cloud\Rendering\Context.h">
+      <Filter>src\Cloud\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cloud\Rendering\OrthoCamera.h">
+      <Filter>src\Cloud\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cloud\Rendering\PerspectiveCamera.h">
+      <Filter>src\Cloud\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cloud\Rendering\RenderCommand.h">
+      <Filter>src\Cloud\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cloud\Rendering\Renderer.h">
+      <Filter>src\Cloud\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cloud\Rendering\RendererAPI.h">
+      <Filter>src\Cloud\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cloud\Rendering\Shader.h">
+      <Filter>src\Cloud\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cloud\Rendering\VertexArray.h">
+      <Filter>src\Cloud\Rendering</Filter>
+    </ClInclude>
     <ClInclude Include="src\Cloud\Window.h">
       <Filter>src\Cloud</Filter>
     </ClInclude>
     <ClInclude Include="src\CloudEngine.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\Buffers\OpenGLIndexBuffer.h">
+      <Filter>src\Platform\OpenGL\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\Buffers\OpenGLVertexBuffer.h">
+      <Filter>src\Platform\OpenGL\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsInput.h">
       <Filter>src\Platform\Windows</Filter>
@@ -1188,24 +1254,6 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\Cloud\Rendering\Context.h" />
-    <ClInclude Include="src\Cloud\Rendering\Shader.h" />
-    <ClInclude Include="src\Cloud\Rendering\Buffers\VertexBuffer.h" />
-    <ClInclude Include="src\Cloud\Rendering\Buffers\IndexBuffer.h" />
-    <ClInclude Include="src\Cloud\Rendering\Buffers\Buffer.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
-    <ClInclude Include="src\Platform\OpenGL\Buffers\OpenGLVertexBuffer.h" />
-    <ClInclude Include="src\Cloud\Rendering\Renderer.h" />
-    <ClInclude Include="src\Platform\OpenGL\Buffers\OpenGLIndexBuffer.h" />
-    <ClInclude Include="src\Cloud\Rendering\VertexArray.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
-    <ClInclude Include="src\Cloud\Rendering\Buffers\BufferLayout.h" />
-    <ClInclude Include="src\Cloud\Rendering\RendererAPI.h" />
-    <ClInclude Include="src\Cloud\Rendering\RenderCommand.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
-    <ClInclude Include="src\Cloud\Rendering\OrthoCamera.h" />
-    <ClInclude Include="src\Cloud\Rendering\PerspectiveCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Cloud\Application.cpp">
@@ -1223,6 +1271,51 @@
     <ClCompile Include="src\Cloud\Log.cpp">
       <Filter>src\Cloud</Filter>
     </ClCompile>
+    <ClCompile Include="src\Cloud\Rendering\Buffers\IndexBuffer.cpp">
+      <Filter>src\Cloud\Rendering\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Cloud\Rendering\Buffers\VertexBuffer.cpp">
+      <Filter>src\Cloud\Rendering\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Cloud\Rendering\OrthoCamera.cpp">
+      <Filter>src\Cloud\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Cloud\Rendering\PerspectiveCamera.cpp">
+      <Filter>src\Cloud\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Cloud\Rendering\RenderCommand.cpp">
+      <Filter>src\Cloud\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Cloud\Rendering\Renderer.cpp">
+      <Filter>src\Cloud\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Cloud\Rendering\RendererAPI.cpp">
+      <Filter>src\Cloud\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Cloud\Rendering\Shader.cpp">
+      <Filter>src\Cloud\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Cloud\Rendering\VertexArray.cpp">
+      <Filter>src\Cloud\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\Buffers\OpenGLIndexBuffer.cpp">
+      <Filter>src\Platform\OpenGL\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\Buffers\OpenGLVertexBuffer.cpp">
+      <Filter>src\Platform\OpenGL\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
       <Filter>src\Platform\Windows</Filter>
     </ClCompile>
@@ -1232,23 +1325,5 @@
     <ClCompile Include="src\cldpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Cloud\Rendering\Shader.cpp" />
-    <ClCompile Include="src\Cloud\Rendering\Buffers\VertexBuffer.cpp" />
-    <ClCompile Include="src\Cloud\Rendering\Buffers\IndexBuffer.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\Buffers\OpenGLVertexBuffer.cpp" />
-    <ClCompile Include="src\Cloud\Rendering\Renderer.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\Buffers\OpenGLIndexBuffer.cpp" />
-    <ClCompile Include="src\Cloud\Rendering\VertexArray.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
-    <ClCompile Include="src\Cloud\Rendering\RendererAPI.cpp" />
-    <ClCompile Include="src\Cloud\Rendering\RenderCommand.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
-    <ClCompile Include="src\Cloud\Rendering\OrthoCamera.cpp" />
-    <ClCompile Include="src\Cloud\Rendering\PerspectiveCamera.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="resources\CloudIco.ico" />
   </ItemGroup>
 </Project>

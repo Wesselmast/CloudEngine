@@ -5,14 +5,15 @@
 #include "PerspectiveCamera.h"
 #include "Shader.h"
 
-namespace Cloud {
+namespace Cloud {	
 	class Renderer {
 	public:
 		static void beginScene(PerspectiveCamera& camera);
 		static void endScene();
 
 		static void submit(const std::shared_ptr<VertexArray>& vertexArray, const std::shared_ptr<Shader>& shader, const glm::mat4& transform = glm::mat4(1.0f));
-		
+		static void submitMesh(const std::shared_ptr<VertexArray>& vertexArray, const std::shared_ptr<Shader>& shader, const std::shared_ptr<Mesh>& mesh);
+
 		inline static RendererAPI::API getCurrentAPI() { 
 			return RendererAPI::getAPI();
 		}

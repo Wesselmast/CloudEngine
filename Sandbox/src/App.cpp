@@ -1,11 +1,25 @@
 #include <CloudEngine.h>
 
+#include "assimp/scene.h"
+#include "assimp/postprocess.h"
+#include "assimp/Importer.hpp"
+
 #include "imgui/imgui.h"
+
+
+static const uint32_t meshImportFlags =
+		aiProcess_Triangulate |
+		aiProcess_SortByPType |
+		aiProcess_OptimizeMeshes |
+		aiProcess_ValidateDataStructure;
+
 
 class ExampleLayer : public Cloud::Layer {
 public:
 	ExampleLayer(const std::string& name = "Example") : Layer(name), name(name), camera(68.0f, 1600.0f/900.0f, 0.01f, 100.0f) {
 
+		camera.setPosition({ 0, 0, 30 });
+		
 		/*	HEXAGON 2d
 			0.75f,  0.0f,  0.0f, 1.0f, 1.0f, 1.0f, 0.0f,
 		   0.33f, -0.75f, 0.0f, 0.5f, 0.0f, 1.0f, 0.0f,
@@ -13,8 +27,29 @@ public:
 		  -0.75f,  0.0f,  0.0f, 1.0f, 1.0f, 1.0f, 0.0f,
 		   0.0f,   0.75f, 0.0f, 1.0f, 0.0f, 0.5f, 0.0f
 		*/
+
+
+		importer = std::make_unique<Assimp::Importer>();
+		const aiScene* scene = importer->ReadFile("res/models/Cube.obj", meshImportFlags);
+
+		CLD_CORE_ASSERT(scene && scene->HasMeshes(), "Scene doesn't contain meshes, failed to load mesh files");
+		aiMesh* mesh = scene->mMeshes[0];
+
+		std::vector<glm::vec3> vertices;
+		for (unsigned int i = 0; i < mesh->mNumVertices; i++) {
+			vertices.push_back({ mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z });
+		}
 		
-		float vertices[] = {
+		subMesh.indexCount = mesh->mNumFaces * 3;
+		
+		std::vector<glm::vec3> indices;
+		for (unsigned int i = 0; i < mesh->mNumFaces; i++) {
+			CLD_CORE_ASSERT(mesh->mFaces[i].mNumIndices == 3, "Faces must have three indices");
+			indices.push_back({ mesh->mFaces[i].mIndices[0], mesh->mFaces[i].mIndices[1], mesh->mFaces[i].mIndices[2] });
+		}
+
+		
+		/*float vertices[] = {
 			 1.0f,  -1.0f, -1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
 			 1.0f,  -1.0f,  1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
 			-1.0f,  -1.0f,  1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
@@ -32,21 +67,20 @@ public:
 				4, 0, 7, 7, 0, 3,
 				3, 2, 7, 7, 2, 6,
 				4, 5, 0, 0, 5, 1
-		}; 
+		}; */
 
 		vertexArray.reset(Cloud::VertexArray::create());
-		vertexBuffer.reset(Cloud::VertexBuffer::create(vertices, sizeof(vertices)));
+		vertexBuffer.reset(Cloud::VertexBuffer::create(vertices.data(), vertices.size()));
+		//vertexBuffer.reset(Cloud::VertexBuffer::create(vertices, sizeof(vertices)));
 
-		Cloud::BufferLayout layout = {
-			{Cloud::ShaderDataType::FLOAT3, "aPosition" },
-			{Cloud::ShaderDataType::FLOAT4, "aColor" }
-		};
-
-		vertexBuffer->setLayout(layout);
-		indexBuffer.reset(Cloud::IndexBuffer::create(indices, sizeof(indices) / sizeof(unsigned int)));
-
+		vertexBuffer->setLayout({
+			{ Cloud::ShaderDataType::FLOAT3, "aPosition" }
+		});
 		vertexArray->addVertexBuffer(vertexBuffer);
-		vertexArray->setIndexBuffer(indexBuffer);	
+		
+		indexBuffer.reset(Cloud::IndexBuffer::create(indices.data(), indices.size() * sizeof(glm::vec3)));
+		//indexBuffer.reset(Cloud::IndexBuffer::create(indices, sizeof(indices) * sizeof(unsigned int)));
+		vertexArray->setIndexBuffer(indexBuffer);
 
 		shader.reset(Cloud::Shader::create("res/shaders/Example.shader"));
 	}
@@ -72,23 +106,28 @@ public:
 		{
 			shader->uploadUniformF1("uRed", sin(time * speed) * 0.5 + brightness - 0.5);
 
-			int halfSize = 5;
-			
-			for(int x = -halfSize; x < halfSize; x++) {
-				for (int y = -halfSize; y < halfSize; y++) {
-					for (int z = -halfSize; z < halfSize; z++) {
-						glm::vec3 position(x * 0.25f, y* 0.25f, z* 0.25f);
-						glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
-						if (x % 2 == 0) {
-							shader->uploadUniformF4("uColor", color);
-						}
-						else {
-							shader->uploadUniformF4("uColor", color2);
-						}
-						Cloud::Renderer::submit(vertexArray, shader, transform);
-					}
-				}
-			}
+			shader->uploadUniformF4("uColor", color);
+			glm::mat4 transform = glm::translate(glm::mat4(1.0f), glm::vec3(0)) * glm::scale(glm::mat4(1.0f), glm::vec3(1.0f));
+			//Cloud::Renderer::submit(vertexArray, shader, transform);
+			Cloud::Renderer::submitMesh(vertexArray, shader, std::make_shared<Cloud::Mesh>(subMesh));
+
+			//int halfSize = 5;
+			//
+			//for(int x = -halfSize; x < halfSize; x++) {
+			//	for (int y = -halfSize; y < halfSize; y++) {
+			//		for (int z = -halfSize; z < halfSize; z++) {
+			//			glm::vec3 position(x * 0.25f, y* 0.25f, z* 0.25f);
+			//			glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+			//			if (x % 2 == 0) {
+			//				shader->uploadUniformF4("uColor", color);
+			//			}
+			//			else {
+			//				shader->uploadUniformF4("uColor", color2);
+			//			}
+			//			Cloud::Renderer::submit(vertexArray, shader, transform);
+			//		}
+			//	}
+			//}
 		}
 		Cloud::Renderer::endScene();
 	}
@@ -126,13 +165,13 @@ public:
 			}
 			case Cloud::EventType::MOUSE_BUTTON_PRESSED: {
 				Cloud::MouseButtonPressedEvent& e = (Cloud::MouseButtonPressedEvent&)event;
-				if (e.getMouseButton() == MOUSE_BTN_3) {
+				if (e.getMouseButton() == MOUSE_BTN_2) {
 					enableCameraRotation = true;
 				}
 			} break;
 			case Cloud::EventType::MOUSE_BUTTON_RELEASED: {
 				Cloud::MouseButtonReleasedEvent& e = (Cloud::MouseButtonReleasedEvent&)event;
-				if(e.getMouseButton() == MOUSE_BTN_3) {
+				if(e.getMouseButton() == MOUSE_BTN_2) {
 					enableCameraRotation = false;
 					firstMouse = true;
 				}
@@ -168,6 +207,7 @@ private:
 	std::shared_ptr<Cloud::VertexBuffer> vertexBuffer;
 	std::shared_ptr<Cloud::VertexArray> vertexArray;
 	std::shared_ptr<Cloud::IndexBuffer> indexBuffer;
+	Cloud::Mesh subMesh;
 
 	Cloud::PerspectiveCamera camera;
 
@@ -191,6 +231,7 @@ private:
 	float cameraSpeed = 1.0f;
 	float sensitivity = 0.2f;
 
+	std::unique_ptr<Assimp::Importer> importer;
 	bool enableCameraRotation = false;
 };
 

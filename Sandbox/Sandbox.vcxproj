@@ -79,7 +79,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>CLD_PLATFORM_WINDOWS;CLD_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\CloudEngine\vendor\spdlog\include;..\CloudEngine\src;..\CloudEngine\vendor;..\CloudEngine\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\CloudEngine\vendor\spdlog\include;..\CloudEngine\src;..\CloudEngine\vendor;..\CloudEngine\vendor\glm;..\CloudEngine\vendor\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -88,14 +88,18 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>..\CloudEngine\vendor\assimp\bin\Debug\assimp-vc141-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>IF EXIST "..\CloudEngine\vendor\assimp\bin\Debug\assimp-vc141-mtd.dll"\ (xcopy /Q /E /Y /I "..\CloudEngine\vendor\assimp\bin\Debug\assimp-vc141-mtd.dll" "..\bin\Debug-windows-x86_64\Sandbox" &gt; nul) ELSE (xcopy /Q /Y /I "..\CloudEngine\vendor\assimp\bin\Debug\assimp-vc141-mtd.dll" "..\bin\Debug-windows-x86_64\Sandbox" &gt; nul)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>CLD_PLATFORM_WINDOWS;CLD_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\CloudEngine\vendor\spdlog\include;..\CloudEngine\src;..\CloudEngine\vendor;..\CloudEngine\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\CloudEngine\vendor\spdlog\include;..\CloudEngine\src;..\CloudEngine\vendor;..\CloudEngine\vendor\glm;..\CloudEngine\vendor\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -108,14 +112,18 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>..\CloudEngine\vendor\assimp\bin\Release\assimp-vc141-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>IF EXIST "..\CloudEngine\vendor\assimp\bin\Release\assimp-vc141-mtd.dll"\ (xcopy /Q /E /Y /I "..\CloudEngine\vendor\assimp\bin\Release\assimp-vc141-mtd.dll" "..\bin\Release-windows-x86_64\Sandbox" &gt; nul) ELSE (xcopy /Q /Y /I "..\CloudEngine\vendor\assimp\bin\Release\assimp-vc141-mtd.dll" "..\bin\Release-windows-x86_64\Sandbox" &gt; nul)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>CLD_PLATFORM_WINDOWS;CLD_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\CloudEngine\vendor\spdlog\include;..\CloudEngine\src;..\CloudEngine\vendor;..\CloudEngine\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\CloudEngine\vendor\spdlog\include;..\CloudEngine\src;..\CloudEngine\vendor;..\CloudEngine\vendor\glm;..\CloudEngine\vendor\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -128,7 +136,11 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>..\CloudEngine\vendor\assimp\bin\Release\assimp-vc141-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>IF EXIST "..\CloudEngine\vendor\assimp\bin\Release\assimp-vc141-mtd.dll"\ (xcopy /Q /E /Y /I "..\CloudEngine\vendor\assimp\bin\Release\assimp-vc141-mtd.dll" "..\bin\Dist-windows-x86_64\Sandbox" &gt; nul) ELSE (xcopy /Q /Y /I "..\CloudEngine\vendor\assimp\bin\Release\assimp-vc141-mtd.dll" "..\bin\Dist-windows-x86_64\Sandbox" &gt; nul)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\App.cpp" />
@@ -137,16 +149,6 @@
     <ProjectReference Include="..\CloudEngine\CloudEngine.vcxproj">
       <Project>{923AE2BD-FEEF-5AB3-87E4-548AF39851B7}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="resources\CloudIco.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="resources\CloudIco.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="resources\CloudIco.aps" />
-    <None Include="res\shaders\Example.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

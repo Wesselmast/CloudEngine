@@ -11,6 +11,9 @@ namespace Cloud {
 		inline static void drawIndexed(const std::shared_ptr<VertexArray>& vertexArray) {
 			api->drawIndexed(vertexArray);
 		}
+		inline static void drawIndexedMesh(const std::shared_ptr<Mesh>& mesh) {
+			api->drawIndexedMesh(mesh);
+		}
 	private:
 		static RendererAPI* api;
 	};
